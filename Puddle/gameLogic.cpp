@@ -13,6 +13,12 @@ Vec2::Vec2(float x, float y) {
 	_length = sqrt(_x * _x + _y * _y);
 }
 
+void Vec2::operator+=(Vec2 other) {
+	this->_x += other._x;
+	this->_y += other._y;
+	this->_length = sqrt(this->_x * this->_x + this->_y * this->_y);
+}
+
 Circle::Circle() {
 	_point = SDL_Point();
 	_radius = 0.0f;

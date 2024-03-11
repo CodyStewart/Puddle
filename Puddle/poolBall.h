@@ -19,10 +19,11 @@ struct PoolBallPhysicsComponent : PhysicsComponent {
 	virtual void update();
 
 private:
+	Vec2 _velocity;
 	Circle _volume;
 	CollisionCircle _collisionVolume;
 
-	void move(PoolBallPhysicsComponent* physics, SDL_Point point);
+	void move(PoolBallPhysicsComponent* physics);
 };
 
 struct PoolBallGraphicsComponent : GraphicsComponent {

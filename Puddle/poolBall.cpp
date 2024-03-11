@@ -1,10 +1,12 @@
 #include "poolBall.h"
+#include "physics.h"
 
 void PoolBallInputComponent::update() {
-	int x = 0;
+
 }
 
 PoolBallPhysicsComponent::PoolBallPhysicsComponent(SDL_Point pos, float radius) {
+	_velocity = Vec2();
 	_volume = Circle(pos, radius);
 	_collisionVolume = CollisionCircle(pos, radius);
 }
@@ -13,14 +15,19 @@ PoolBallPhysicsComponent::~PoolBallPhysicsComponent() {
 	
 }
 
-void PoolBallPhysicsComponent::move(PoolBallPhysicsComponent* physics, SDL_Point point) {
-	physics->_volume._point = point;
-	physics->_collisionVolume._circle._point = point;
+void PoolBallPhysicsComponent::move(PoolBallPhysicsComponent* physics) {
+	physics->_volume._point.x += static_cast<int>(_velocity._x);
+	physics->_volume._point.y += static_cast<int>(_velocity._y);
+	physics->_collisionVolume._circle._point = physics->_volume._point;
 }
 
+extern PhysicsSystem* physicsSystem;
+
 void PoolBallPhysicsComponent::update() {
-	_volume._point.x += 1;
-	move(this, _volume._point);
+	//_volume._point.x += 1;
+	Vec2 gravity = physicsSystem->calculateGravity();
+	_velocity += gravity;
+	move(this);
 }
 
 PoolBallGraphicsComponent::PoolBallGraphicsComponent(PuddleRenderer* renderer, PoolBallPhysicsComponent* physics, Texture* texture) {

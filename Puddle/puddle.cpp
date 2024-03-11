@@ -11,15 +11,19 @@
 #include "puddleRenderer.h"
 #include "zipFile.h"
 #include "gameObjects.h"
+#include "physics.h"
 
 extern SDL_Window* window;
 extern PuddleApp* app;
 extern TTF_Font* DefaultFont;
 
+PhysicsSystem* physicsSystem = new PhysicsSystem();
+
 PuddleApp::PuddleApp() {
 	_resourceManager = new ResourceManager();
 	_gameObjectManager = new GameObjectManager();
 	_renderer = new PuddleRenderer();
+	_physicsSystem = physicsSystem;
 }
 
 bool PuddleApp::init() {
@@ -120,7 +124,8 @@ std::vector<GameObject*>* PuddleApp::getGameObjects() {
 	return _gameObjectManager->getGameObjects();
 }
 
-void PuddleApp::updateGame() {
+void PuddleApp::updateGame(Uint32 deltaT) {
+	_physicsSystem->update(deltaT);
 	_gameObjectManager->update();
 }
 

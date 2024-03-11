@@ -11,6 +11,8 @@ struct Vec2 {
 
 	Vec2();
 	Vec2(float x, float y);
+
+	void operator+=(Vec2 other);
 };
 
 struct Circle {

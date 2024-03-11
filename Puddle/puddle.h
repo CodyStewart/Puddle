@@ -14,6 +14,7 @@ const int CURRENT_SCREEN_HEIGHT = DEFAULT_SCREEN_HEIGHT;
 struct GameObject;
 struct GameObjectManager;
 struct PuddleRenderer;
+struct PhysicsSystem;
 
 struct PuddleApp {
 	PuddleApp();
@@ -26,7 +27,7 @@ struct PuddleApp {
 
 	void addGameObject(GameObject* obj);
 
-	void updateGame();
+	void updateGame(Uint32 deltaT);
 	void renderGame();
 
 	PuddleRenderer* getRenderer();
@@ -37,5 +38,5 @@ private:
 	ResourceManager* _resourceManager;
 	GameObjectManager* _gameObjectManager;
 	PuddleRenderer* _renderer;
-	//std::vector<GameObject*> _gameObjects;
+	PhysicsSystem* _physicsSystem;
 };

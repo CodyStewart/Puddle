@@ -7,6 +7,8 @@
 
 #define UINTMAX UINT_MAX
 
+#define GRAVITY 9.8f
+
 #if !defined(SAFE_DELETE)
 #define SAFE_DELETE(x) if(x) delete x; x=NULL;
 #endif

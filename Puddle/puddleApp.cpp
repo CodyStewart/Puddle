@@ -8,6 +8,7 @@
 #include "puddleRenderer.h"
 #include "texture.h"
 #include "gameLogic.h"
+#include "timer.h"
 
 SDL_Window* window = nullptr;
 
@@ -15,11 +16,7 @@ PuddleApp* app = new PuddleApp();
 
 TTF_Font* DefaultFont = nullptr;
 
-//PuddleRenderer* appRenderer = new PuddleRenderer();
-
 EntityGenerator* entGen = new EntityGenerator();
-
-Texture* circleTexture = new Texture();
 
 int main(int argc, char* args[]) {
 	if (!app->init()) {
@@ -52,17 +49,10 @@ int main(int argc, char* args[]) {
 
 				bool runGame = true;
 
-				//Resource circleText("blackOutlineCircle.png");
-				//ResHandleShrdPtr circleHandle = app->getResourceHandle(&circleText);
-				//Texture ballTexture(appRenderer->getRenderer(), circleHandle.get()->buffer(), circleHandle.get()->size());
-				////if (circleHandle.get()) {
-				//	
-				//	Entity oolBall = entGen->generatateNewEntity();
-				//	SDL_Point point = { 50, 50 };
-				//	PoolBall oneBall(oolBall, &ballTexture, point);
-					//oneBall.render(appRenderer->getRenderer());
-					//app->addGameObject(&oneBall);
-				//}
+				Uint32 deltaT = 0;
+				Timer frameTimer = Timer();
+				frameTimer.start();
+
 				while (runGame) {
 					while (SDL_PollEvent(&e) != 0) {
 						if (e.type == SDL_QUIT) {
@@ -80,9 +70,13 @@ int main(int argc, char* args[]) {
 							}
 						}
 					}
+
+					deltaT = frameTimer.getTicks();
+					frameTimer.start();
+
 					SDL_SetRenderDrawColor(app->getRenderer()->getRenderer(), 0xFF, 0xFF, 0xFF, 0xFF);
 					SDL_RenderClear(app->getRenderer()->getRenderer());
-					app->updateGame();
+					app->updateGame(deltaT);
 					//circleTexture->render(this->getRenderer(), 100, 100);
 					//renderGameEntities(app);
 					//oneBall.render(appRenderer->getRenderer());

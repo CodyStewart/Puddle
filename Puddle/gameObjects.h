@@ -13,8 +13,6 @@
 
 struct GameObject {
 	Entity _entity;
-	Vec2 _velocity = Vec2();
-	SDL_Point _position = { 0, 0 };
 
 	GameObject(InputComponent* input, PhysicsComponent* physics, GraphicsComponent* graphics) : _input(input), _physics(physics), _graphics(graphics) {} ;
 
@@ -23,9 +21,6 @@ struct GameObject {
 		_physics->update();
 		_graphics->update();
 	}
-
-	void setVelocity(Vec2 velocity);
-	void setPosition(SDL_Point position);
 
 private:
 	InputComponent* _input;

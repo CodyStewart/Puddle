@@ -1,14 +1,6 @@
 #include "gameObjects.h"
 #include "poolBall.h"
 
-void GameObject::setVelocity(Vec2 velocity) {
-	_velocity = velocity;
-}
-
-void GameObject::setPosition(SDL_Point position) {
-	_position = position;
-}
-
 GameObjectManager::GameObjectManager() {
 	_gameObjects.clear();
 }
