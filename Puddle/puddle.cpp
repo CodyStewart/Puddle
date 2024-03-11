@@ -21,9 +21,9 @@ PhysicsSystem* physicsSystem = new PhysicsSystem();
 
 PuddleApp::PuddleApp() {
 	_resourceManager = new ResourceManager();
-	_gameObjectManager = new GameObjectManager();
 	_renderer = new PuddleRenderer();
 	_physicsSystem = physicsSystem;
+	_gameWorld = new Game();
 }
 
 bool PuddleApp::init() {
@@ -104,29 +104,33 @@ bool PuddleApp::loadResources() {
 	return success;
 }
 
-bool PuddleApp::loadObjects() {
+bool PuddleApp::loadView(ViewState viewState) {
 	bool success = true;
 
-	success = _gameObjectManager->generateGameObjects(_resourceManager, _renderer);
+	// get the current view (we may need this later)
+	ViewState previousViewState = _gameWorld->getCurrentView();
+
+	// load the new game view
+	success = _gameWorld->generateView(viewState, _resourceManager, _renderer);
 
 	return success;
 }
 
-void PuddleApp::addGameObject(GameObject* obj) {
-	_gameObjectManager->addGameObject(obj);
+void PuddleApp::addExtraGameObject(GameObject* obj) {
+	_gameWorld->addExtraGameObject(obj);
 }
 
 ResHandleShrdPtr PuddleApp::getResourceHandle(Resource* res) {
 	return _resourceManager->getHandle(res);
 }
 
-std::vector<GameObject*>* PuddleApp::getGameObjects() {
-	return _gameObjectManager->getGameObjects();
+std::vector<GameObject*>* PuddleApp::getExtraGameObjects() {
+	return _gameWorld->getExtraGameObjects();
 }
 
 void PuddleApp::updateGame(Uint32 deltaT) {
 	_physicsSystem->update(deltaT);
-	_gameObjectManager->update();
+	_gameWorld->update();
 }
 
 void PuddleApp::renderGame() {

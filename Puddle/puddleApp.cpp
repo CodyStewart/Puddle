@@ -9,6 +9,7 @@
 #include "texture.h"
 #include "gameLogic.h"
 #include "timer.h"
+#include "Views.h"
 
 SDL_Window* window = nullptr;
 
@@ -30,13 +31,12 @@ int main(int argc, char* args[]) {
 		else {
 			printf("hello!\n");
 			// load resources to the resources cache
-			//circleTexture->loadTextureFromFile(appRenderer->getRenderer(), "blackOutlineCircle.png");
 			if (!app->loadResources()) {
 				printf("Failed to load media!\n");
 			}
 			else {
-				if (!app->loadObjects()) {
-					printf("Failed to load game objects!\n");
+				if (!app->loadView(startView)) {
+					printf("Failed to load view!\n");
 				}
 				else {
 
@@ -77,13 +77,7 @@ int main(int argc, char* args[]) {
 					SDL_SetRenderDrawColor(app->getRenderer()->getRenderer(), 0xFF, 0xFF, 0xFF, 0xFF);
 					SDL_RenderClear(app->getRenderer()->getRenderer());
 					app->updateGame(deltaT);
-					//circleTexture->render(this->getRenderer(), 100, 100);
-					//renderGameEntities(app);
-					//oneBall.render(appRenderer->getRenderer());
-					//circleTexture->render(appRenderer->getRenderer(), 400, 400);
-					//app->renderGame();
 					SDL_RenderPresent(app->getRenderer()->getRenderer());
-					//appRenderer->renderGame(app);
 				}
 
 				app->close();

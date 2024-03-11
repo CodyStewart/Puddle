@@ -11,10 +11,12 @@
 #include "resourceManager.h"
 #include "puddleRenderer.h"
 
+extern EntityGenerator* entGen;
+
 struct GameObject {
 	Entity _entity;
 
-	GameObject(InputComponent* input, PhysicsComponent* physics, GraphicsComponent* graphics) : _input(input), _physics(physics), _graphics(graphics) {} ;
+	GameObject(InputComponent* input, PhysicsComponent* physics, GraphicsComponent* graphics) : _input(input), _physics(physics), _graphics(graphics) { _entity = entGen->generatateNewEntity(); }
 
 	void update() {
 		_input->update();
@@ -26,19 +28,4 @@ private:
 	InputComponent* _input;
 	PhysicsComponent* _physics;
 	GraphicsComponent* _graphics;
-};
-
-struct GameObjectManager {
-	GameObjectManager();
-
-	bool generateGameObjects(ResourceManager* resManager, PuddleRenderer* renderer);
-
-	void addGameObject(GameObject* obj);
-
-	std::vector<GameObject*>* getGameObjects();
-
-	void update();
-
-private:
-	std::vector<GameObject*> _gameObjects;
 };

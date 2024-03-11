@@ -5,6 +5,8 @@
 #include "gameObjects.h"
 #include "resourceManager.h"
 #include "puddleRenderer.h"
+#include "game.h"
+#include "Views.h"
 
 const int DEFAULT_SCREEN_WIDTH = 1920;
 const int DEFAULT_SCREEN_HEIGHT = 1080;
@@ -15,17 +17,21 @@ struct GameObject;
 struct GameObjectManager;
 struct PuddleRenderer;
 struct PhysicsSystem;
+struct View;
+struct Game;
+
+enum ViewState;
 
 struct PuddleApp {
 	PuddleApp();
 	bool init();
 	bool loadResources();
-	bool loadObjects();
+	bool loadView(ViewState viewState);
 
 	ResHandleShrdPtr getResourceHandle(Resource* res);
-	std::vector<GameObject*>* getGameObjects();
+	std::vector<GameObject*>* getExtraGameObjects();
 
-	void addGameObject(GameObject* obj);
+	void addExtraGameObject(GameObject* obj);
 
 	void updateGame(Uint32 deltaT);
 	void renderGame();
@@ -35,6 +41,7 @@ struct PuddleApp {
 	void close();
 
 private:
+	Game* _gameWorld;
 	ResourceManager* _resourceManager;
 	GameObjectManager* _gameObjectManager;
 	PuddleRenderer* _renderer;

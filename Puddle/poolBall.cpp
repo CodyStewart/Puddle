@@ -27,6 +27,7 @@ void PoolBallPhysicsComponent::update() {
 	//_volume._point.x += 1;
 	Vec2 gravity = physicsSystem->calculateGravity();
 	_velocity += gravity;
+	//checkCollisions(world);
 	move(this);
 }
 

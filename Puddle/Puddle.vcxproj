@@ -134,6 +134,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="commonTypedefs.h" />
+    <ClCompile Include="game.cpp" />
     <ClCompile Include="gameLogic.cpp" />
     <ClCompile Include="gameObjects.cpp" />
     <ClCompile Include="gameObjects.h" />
@@ -145,9 +146,11 @@
     <ClCompile Include="resourceManager.cpp" />
     <ClCompile Include="texture.cpp" />
     <ClCompile Include="timer.cpp" />
+    <ClCompile Include="Views.cpp" />
     <ClCompile Include="zipFile.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="game.h" />
     <ClInclude Include="gameLogic.h" />
     <ClInclude Include="macros.h" />
     <ClInclude Include="physics.h" />
@@ -157,6 +160,7 @@
     <ClInclude Include="resourceManager.h" />
     <ClInclude Include="texture.h" />
     <ClInclude Include="timer.h" />
+    <ClInclude Include="Views.h" />
     <ClInclude Include="zipFile.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
