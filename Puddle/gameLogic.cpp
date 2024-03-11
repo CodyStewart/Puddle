@@ -1,6 +1,18 @@
 #include "gameLogic.h"
 #include "macros.h"
 
+Vec2::Vec2() {
+	_x = 0;
+	_y = 0;
+	_length = 0;
+}
+
+Vec2::Vec2(float x, float y) {
+	_x = x;
+	_y = y;
+	_length = sqrt(_x * _x + _y * _y);
+}
+
 Circle::Circle() {
 	_point = SDL_Point();
 	_radius = 0.0f;

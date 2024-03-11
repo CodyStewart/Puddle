@@ -12,29 +12,26 @@
 #include "puddleRenderer.h"
 
 struct GameObject {
-	virtual void render(SDL_Renderer* renderer);
-	virtual void move(SDL_Point point);
+	Entity _entity;
+	Vec2 _velocity = Vec2();
+	SDL_Point _position = { 0, 0 };
 
-};
+	GameObject(InputComponent* input, PhysicsComponent* physics, GraphicsComponent* graphics) : _input(input), _physics(physics), _graphics(graphics) {} ;
 
-struct PoolBall : GameObject {
-	PoolBall();
-	PoolBall(Entity ball, Texture* ballTexture);
-	PoolBall(Entity ball, Texture* ballTexture, SDL_Point pos, float radius);
-	~PoolBall();
+	void update() {
+		_input->update();
+		_physics->update();
+		_graphics->update();
+	}
 
-	void move(SDL_Point point) override;
-
-	void render(SDL_Renderer* renderer) override;
+	void setVelocity(Vec2 velocity);
+	void setPosition(SDL_Point position);
 
 private:
-	Entity _ball;
-	Texture* _ballTexture;
-	Circle _shape;
-	CollisionCircle _collision;
+	InputComponent* _input;
+	PhysicsComponent* _physics;
+	GraphicsComponent* _graphics;
 };
-
-
 
 struct GameObjectManager {
 	GameObjectManager();
@@ -44,6 +41,8 @@ struct GameObjectManager {
 	void addGameObject(GameObject* obj);
 
 	std::vector<GameObject*>* getGameObjects();
+
+	void update();
 
 private:
 	std::vector<GameObject*> _gameObjects;

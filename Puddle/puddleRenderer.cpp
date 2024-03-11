@@ -31,9 +31,6 @@ void PuddleRenderer::destroy() {
 }
 
 void PuddleRenderer::renderGameEntities(GameObjectManager* GOManager) {
-	std::vector<GameObject*>* objectsToRender = GOManager->getGameObjects();
-	GameObject* poolBall = objectsToRender->at(0);
-	poolBall->render(this->getRenderer());
 	/*for (std::vector<GameObject>::iterator itr = objectsToRender->begin(); itr != objectsToRender->end(); itr++) {
 		itr->render(this->getRenderer());
 	}*/

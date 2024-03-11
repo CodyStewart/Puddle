@@ -26,6 +26,7 @@ struct PuddleApp {
 
 	void addGameObject(GameObject* obj);
 
+	void updateGame();
 	void renderGame();
 
 	PuddleRenderer* getRenderer();

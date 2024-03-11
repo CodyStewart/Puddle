@@ -63,10 +63,6 @@ int main(int argc, char* args[]) {
 					//oneBall.render(appRenderer->getRenderer());
 					//app->addGameObject(&oneBall);
 				//}
-				SDL_Point point = { 0, 0 };
-				std::vector<GameObject*>* object = app->getGameObjects();
-				GameObject* poolBall = object->at(0);
-				poolBall->move(point);
 				while (runGame) {
 					while (SDL_PollEvent(&e) != 0) {
 						if (e.type == SDL_QUIT) {
@@ -84,16 +80,15 @@ int main(int argc, char* args[]) {
 							}
 						}
 					}
-					//SDL_SetRenderDrawColor(appRenderer->getRenderer(), 0xFF, 0xFF, 0xFF, 0xFF);
-					//SDL_RenderClear(appRenderer->getRenderer());
+					SDL_SetRenderDrawColor(app->getRenderer()->getRenderer(), 0xFF, 0xFF, 0xFF, 0xFF);
+					SDL_RenderClear(app->getRenderer()->getRenderer());
+					app->updateGame();
 					//circleTexture->render(this->getRenderer(), 100, 100);
 					//renderGameEntities(app);
 					//oneBall.render(appRenderer->getRenderer());
 					//circleTexture->render(appRenderer->getRenderer(), 400, 400);
-					app->renderGame();
+					//app->renderGame();
 					SDL_RenderPresent(app->getRenderer()->getRenderer());
-					point.x += 1;
-					poolBall->move(point);
 					//appRenderer->renderGame(app);
 				}
 

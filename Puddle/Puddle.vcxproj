@@ -137,6 +137,7 @@
     <ClCompile Include="gameLogic.cpp" />
     <ClCompile Include="gameObjects.cpp" />
     <ClCompile Include="gameObjects.h" />
+    <ClCompile Include="poolBall.cpp" />
     <ClCompile Include="puddle.cpp" />
     <ClCompile Include="puddleApp.cpp" />
     <ClCompile Include="puddleRenderer.cpp" />
@@ -147,6 +148,7 @@
   <ItemGroup>
     <ClInclude Include="gameLogic.h" />
     <ClInclude Include="macros.h" />
+    <ClInclude Include="poolBall.h" />
     <ClInclude Include="puddle.h" />
     <ClInclude Include="puddleRenderer.h" />
     <ClInclude Include="resourceManager.h" />

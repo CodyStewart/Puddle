@@ -120,6 +120,10 @@ std::vector<GameObject*>* PuddleApp::getGameObjects() {
 	return _gameObjectManager->getGameObjects();
 }
 
+void PuddleApp::updateGame() {
+	_gameObjectManager->update();
+}
+
 void PuddleApp::renderGame() {
 	_renderer->renderGame(_gameObjectManager);
 }
