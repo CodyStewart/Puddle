@@ -35,7 +35,7 @@ int main(int argc, char* args[]) {
 				printf("Failed to load media!\n");
 			}
 			else {
-				if (!app->loadView(startView)) {
+				if (!app->loadView(debugView)) {
 					printf("Failed to load view!\n");
 				}
 				else {

@@ -14,24 +14,13 @@ Texture::Texture(Texture* other) { // copy constructor
 
 Texture::Texture(SDL_Renderer* renderer, char* buffer, uint32 size) {
 	_texture = nullptr;
-	//SDL_RWops* rwop = SDL_RWFromFile("blackOutlineCircle.png", "rb");
-	//SDL_Surface* surface = IMG_LoadPNG_RW(rwop);
 	SDL_RWops* ops = SDL_RWFromMem(buffer, size);
-	//SDL_RWseek(ops, 0, RW_SEEK_SET);
 	printf("%d", IMG_isPNG(ops));
 	printf("%s\n", SDL_GetError());
 	printf("%s\n", IMG_GetError());
-	//ops->type = SDL_RWOPS_UNKNOWN;
-	//SDL_RWwrite(ops, buffer, size, 1);
-	//SDL_Surface* surface = SDL_LoadBMP_RW(ops, 1);
-	//SDL_Surface* surface = IMG_Load_RW(ops, 0);
 	_texture = IMG_LoadTexture_RW(renderer, ops, 0);
-	//SDL_Surface* surface = SDL_CreateRGBSurfaceFrom(buffer, 64, 64, 32, 64*32/8, 0, 0, 0, 0xFFFFFFFF);
-	//SDL_Texture* txt = SDL_CreateTextureFromSurface(renderer, surface);
 	printf("%s\n", SDL_GetError());
 	printf("%s\n", IMG_GetError());
-	//_texture = txt;
-
 
 	if (_texture != NULL) {
 		SDL_QueryTexture(_texture, NULL, NULL, &_width, &_height);

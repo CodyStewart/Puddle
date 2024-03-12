@@ -19,6 +19,18 @@ void Vec2::operator+=(Vec2 other) {
 	this->_length = sqrt(this->_x * this->_x + this->_y * this->_y);
 }
 
+Rect::Rect() {
+	_w = 0;
+	_h = 0;
+	_point = { 0,0 };
+}
+
+Rect::Rect(SDL_Point point, int width, int height) {
+	_w = width;
+	_h = height;
+	_point = point;
+}
+
 Circle::Circle() {
 	_point = SDL_Point();
 	_radius = 0.0f;
@@ -54,13 +66,22 @@ CollisionCircle::CollisionCircle(SDL_Point pos, float radius) {
 }
 
 CollisionBox::CollisionBox() {
-	_box.x = 0;
-	_box.y = 0;
-	_box.w = 0;
-	_box.h = 0;
+	_box._point.x = 0;
+	_box._point.y = 0;
+	_box._w = 0;
+	_box._h = 0;
 }
 
 CollisionBox::CollisionBox(int x, int y) {
-	_box.x = x;
-	_box.y = y;
+	_box._point.x = x;
+	_box._point.y = y;
+	_box._w = 0;
+	_box._h = 0;
+}
+
+CollisionBox::CollisionBox(SDL_Point point, int width, int height) {
+	_box._point.x = point.x;
+	_box._point.y = point.y;
+	_box._w = width;
+	_box._h = height;
 }

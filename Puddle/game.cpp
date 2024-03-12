@@ -23,8 +23,10 @@ bool Game::generateView(ViewState viewState, ResourceManager* resManager, Puddle
 	if (_world)
 		delete _world;
 	_world = new View(viewState, resManager, renderer);
+
 	if (_world)
 		success = true;
+	
 	if (success)
 		printf("View %d successfully loaded\n", viewState);
 	else

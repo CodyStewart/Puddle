@@ -16,6 +16,7 @@ extern EntityGenerator* entGen;
 struct GameObject {
 	Entity _entity;
 
+	GameObject(PhysicsComponent* physics, GraphicsComponent* graphics) : _input(nullptr), _physics(physics), _graphics(graphics) { _entity = entGen->generatateNewEntity(); }
 	GameObject(InputComponent* input, PhysicsComponent* physics, GraphicsComponent* graphics) : _input(input), _physics(physics), _graphics(graphics) { _entity = entGen->generatateNewEntity(); }
 
 	void update() {

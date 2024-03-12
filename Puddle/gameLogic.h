@@ -15,17 +15,28 @@ struct Vec2 {
 	void operator+=(Vec2 other);
 };
 
+struct Rect {
+	SDL_Point _point;
+	int _w;
+	int _h;
+
+	Rect();
+	Rect(SDL_Point point, int width, int height);
+};
+
 struct Circle {
-	Circle();
-	Circle(SDL_Point point, float radius);
 	SDL_Point _point;
 	float _radius;
+	
+	Circle();
+	Circle(SDL_Point point, float radius);
 };
 
 struct Entity {
+	uint32 _id;
+	
 	Entity();
 	~Entity();
-	uint32 _id;
 };
 
 struct EntityGenerator {
@@ -36,17 +47,18 @@ private:
 };
 
 struct CollisionCircle {
+	Circle _circle;
+	
 	CollisionCircle();
 	CollisionCircle(SDL_Point pos, float radius);
-
-	Circle _circle;
 };
 
 struct CollisionBox {
+	Rect _box;
+
 	CollisionBox();
 	CollisionBox(int x, int y);
-
-	SDL_Rect _box;
+	CollisionBox(SDL_Point point, int width, int height);
 };
 
 struct Component {
