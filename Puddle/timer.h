@@ -10,14 +10,14 @@ struct Timer {
 	void pause();
 	void unpause();
 
-	Uint32 getTicks();
+	Uint64 getTicks();
 
 	bool isStarted();
 	bool isPaused();
 
 private:
-	Uint32 startTicks;
-	Uint32 pausedTicks;
+	Uint64 startTicks;
+	Uint64 pausedTicks;
 
 	bool paused;
 	bool started;

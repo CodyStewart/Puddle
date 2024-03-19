@@ -1,5 +1,6 @@
 #include <stdio.h>
 #include <string>
+#include <sstream>
 
 #include <SDL.h>
 #include <SDL_ttf.h>
@@ -16,6 +17,7 @@ SDL_Window* window = nullptr;
 PuddleApp* app = new PuddleApp();
 
 TTF_Font* DefaultFont = nullptr;
+TextTexture* frameTimeText = new TextTexture();
 
 EntityGenerator* entGen = new EntityGenerator();
 
@@ -39,45 +41,58 @@ int main(int argc, char* args[]) {
 					printf("Failed to load view!\n");
 				}
 				else {
+					static Timer timeToStart = Timer();
+					timeToStart.start();
 
-				}
-				/*if (Mix_PlayingMusic() == 0) {
-					Mix_PlayMusic(music, -1);
-				}*/
+					/*if (Mix_PlayingMusic() == 0) {
+						Mix_PlayMusic(music, -1);
+					}*/
 
-				SDL_Event e;
+					SDL_Event e;
 
-				bool runGame = true;
+					bool runGame = true;
 
-				Uint32 deltaT = 0;
-				Timer frameTimer = Timer();
-				frameTimer.start();
-
-				while (runGame) {
-					while (SDL_PollEvent(&e) != 0) {
-						if (e.type == SDL_QUIT) {
-							runGame = false;
-						}
-						else if (e.type == SDL_KEYDOWN)
-						{
-							switch (e.key.keysym.sym) {
-							case SDLK_ESCAPE:
-								runGame = false;
-								break;
-
-							default:
-								break;
-							}
-						}
-					}
-
-					deltaT = frameTimer.getTicks();
+					Uint64 deltaT = 0;
+					Timer frameTimer = Timer();
 					frameTimer.start();
 
-					SDL_SetRenderDrawColor(app->getRenderer()->getRenderer(), 0xFF, 0xFF, 0xFF, 0xFF);
-					SDL_RenderClear(app->getRenderer()->getRenderer());
-					app->updateGame(deltaT);
-					SDL_RenderPresent(app->getRenderer()->getRenderer());
+					while (runGame) {
+						while (SDL_PollEvent(&e) != 0) {
+							if (e.type == SDL_QUIT) {
+								runGame = false;
+							}
+							else if (e.type == SDL_KEYDOWN)
+							{
+								switch (e.key.keysym.sym) {
+								case SDLK_ESCAPE:
+									runGame = false;
+									break;
+
+								default:
+									break;
+								}
+							}
+						}
+
+						deltaT = frameTimer.getTicks();
+						frameTimer.start();
+						std::stringstream fpsStr;
+						fpsStr.str("");
+						fpsStr << "deltaT: " << deltaT;
+						frameTimeText->loadFromRenderedText(app->getRenderer()->getRenderer(), fpsStr.str().c_str(), DefaultFont, {0,0,0});
+
+						if (timeToStart.getTicks() / 10000 > 3000.0f) {
+							auto objects = app->getGameObjects();
+							objects->at(0)->AddImpulse(Vec2(2.0f, 14.0f));
+							timeToStart.stop();
+						}
+
+						SDL_SetRenderDrawColor(app->getRenderer()->getRenderer(), 0xFF, 0xFF, 0xFF, 0xFF);
+						SDL_RenderClear(app->getRenderer()->getRenderer());
+						app->updateGame(deltaT);
+						frameTimeText->render(app->getRenderer()->getRenderer(), 0, 0);
+						SDL_RenderPresent(app->getRenderer()->getRenderer());
+					}
 				}
 
 				app->close();

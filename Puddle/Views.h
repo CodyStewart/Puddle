@@ -20,6 +20,9 @@ struct View {
 
 	void update();
 
+	std::vector<GameObject*>* getGameObjects();
+	GameObject* getGameObject(uint32 id);
+
 private:
 	std::vector<GameObject*> _gameObjects;
 };

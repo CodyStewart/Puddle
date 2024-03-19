@@ -12,7 +12,7 @@ void Timer::start() {
 	started = true;
 	paused = false;
 
-	startTicks = SDL_GetTicks();
+	startTicks = SDL_GetPerformanceCounter();
 	pausedTicks = 0;
 }
 
@@ -28,7 +28,7 @@ void Timer::pause() {
 	if (started && !paused) {
 		paused = true;
 
-		pausedTicks = SDL_GetTicks() - startTicks;
+		pausedTicks = SDL_GetPerformanceCounter() - startTicks;
 		startTicks = 0;
 	}
 }
@@ -37,19 +37,19 @@ void Timer::unpause() {
 	if (started && paused) {
 		paused = false;
 
-		startTicks = SDL_GetTicks() - pausedTicks;
+		startTicks = SDL_GetPerformanceCounter() - pausedTicks;
 	}
 }
 
-Uint32 Timer::getTicks() {
-	Uint32 time = 0;
+Uint64 Timer::getTicks() {
+	Uint64 time = 0;
 
 	if (started) {
 		if (paused) {
 			time = pausedTicks;
 		}
 		else {
-			time = SDL_GetTicks() - startTicks;
+			time = SDL_GetPerformanceCounter() - startTicks;
 		}
 	}
 

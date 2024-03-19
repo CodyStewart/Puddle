@@ -5,6 +5,7 @@
 #include "Views.h"
 
 enum ViewState;
+
 struct View;
 struct GameObject;
 
@@ -12,14 +13,15 @@ struct Game {
 	Game();
 	~Game();
 
-	void update();
+	void update(Uint32 deltaT);
 
 	bool generateView(ViewState viewState, ResourceManager* resManager, PuddleRenderer* renderer);
 
 	void addExtraGameObject(GameObject* obj);
 
+	std::vector<GameObject*>* getGameObjects();
 	std::vector<GameObject*>* getExtraGameObjects();
-
+	GameObject* getObject(uint32 id);
 
 	ViewState const getCurrentView();
 

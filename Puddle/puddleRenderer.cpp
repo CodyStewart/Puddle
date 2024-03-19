@@ -30,19 +30,19 @@ void PuddleRenderer::destroy() {
 	_renderer = nullptr;
 }
 
-void PuddleRenderer::renderGameEntities(GameObjectManager* GOManager) {
-	/*for (std::vector<GameObject>::iterator itr = objectsToRender->begin(); itr != objectsToRender->end(); itr++) {
-		itr->render(this->getRenderer());
-	}*/
-}
+//void PuddleRenderer::renderGameEntities(GameObjectManager* GOManager) {
+//	/*for (std::vector<GameObject>::iterator itr = objectsToRender->begin(); itr != objectsToRender->end(); itr++) {
+//		itr->render(this->getRenderer());
+//	}*/
+//}
 
-void PuddleRenderer::renderGame(GameObjectManager* GOManager) {
-	SDL_SetRenderDrawColor(_renderer, 0xFF, 0xFF, 0xFF, 0xFF);
-	SDL_RenderClear(_renderer);
-	//circleTexture->render(this->getRenderer(), 100, 100);
-	renderGameEntities(GOManager);
-	SDL_RenderPresent(_renderer);
-}
+//void PuddleRenderer::renderGame(GameObjectManager* GOManager) {
+//	SDL_SetRenderDrawColor(_renderer, 0xFF, 0xFF, 0xFF, 0xFF);
+//	SDL_RenderClear(_renderer);
+//	//circleTexture->render(this->getRenderer(), 100, 100);
+//	renderGameEntities(GOManager);
+//	SDL_RenderPresent(_renderer);
+//}
 
 SDL_Renderer* PuddleRenderer::getRenderer() {
 	return _renderer;

@@ -14,7 +14,6 @@ const int CURRENT_SCREEN_WIDTH = DEFAULT_SCREEN_WIDTH;
 const int CURRENT_SCREEN_HEIGHT = DEFAULT_SCREEN_HEIGHT;
 
 struct GameObject;
-struct GameObjectManager;
 struct PuddleRenderer;
 struct PhysicsSystem;
 struct View;
@@ -33,17 +32,20 @@ struct PuddleApp {
 
 	void addExtraGameObject(GameObject* obj);
 
-	void updateGame(Uint32 deltaT);
+	void updateGame(Uint64 deltaT);
 	void renderGame();
 
 	PuddleRenderer* getRenderer();
+	std::vector<GameObject*>* getGameObjects();
+	GameObject* getObject(uint32 id) { return _gameWorld->getObject(id); }
+	//uint32 getThisFrametime() { return _physicsSystem->getThisFrametime(); }
 
 	void close();
 
 private:
 	Game* _gameWorld;
 	ResourceManager* _resourceManager;
-	GameObjectManager* _gameObjectManager;
+	//GameObjectManager* _gameObjectManager;
 	PuddleRenderer* _renderer;
 	PhysicsSystem* _physicsSystem;
 };

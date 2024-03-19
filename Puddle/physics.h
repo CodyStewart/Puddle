@@ -7,10 +7,14 @@
 struct PhysicsSystem {
 	PhysicsSystem();
 
-	void update(Uint32 deltaT);
+	void update(Uint64 deltaT);
 
 	Vec2 calculateGravity();
+	void checkCollisions(PuddleApp* app);
+	ContactInfo* checkCollisionWithObject(GameObject* object, ContactInfo* cInfo);
+
+	uint64 getThisFrametime() { return timeSinceLastFrame; }
 
 private:
-	uint32 timeSinceLastFrame;
+	uint64 timeSinceLastFrame;
 };

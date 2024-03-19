@@ -3,10 +3,12 @@
 
 #include "puddle.h"
 
-#define UNIT_SIZE CURRENT_SCREEN_WIDTH / 30;
+#define UNIT_SIZE CURRENT_SCREEN_WIDTH / 30
+#define GRAPHIC_SCALE 10
 
 #define UINTMAX UINT_MAX
 
+#define PI 3.14159f
 #define GRAVITY 9.8f
 
 #if !defined(SAFE_DELETE)

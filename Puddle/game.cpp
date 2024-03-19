@@ -43,11 +43,19 @@ void Game::addExtraGameObject(GameObject* obj) {
 	_extraGameObjects.push_back(obj);
 }
 
+std::vector<GameObject*>* Game::getGameObjects() {
+	return _world->getGameObjects();
+}
+
 std::vector<GameObject*>* Game::getExtraGameObjects() {
 	return &_extraGameObjects;
 }
 
-void Game::update() {
+GameObject* Game::getObject(uint32 id) {
+	return this->_world->getGameObject(id);
+}
+
+void Game::update(Uint32 deltaT) {
 	_world->update();
 
 	for (auto object : _extraGameObjects) {

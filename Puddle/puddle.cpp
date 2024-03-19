@@ -61,6 +61,12 @@ bool PuddleApp::init() {
 				printf("SDL_mixer could not initialize! SDL_mixer Error: %s\n", Mix_GetError());
 				success = false;
 			}
+
+			DefaultFont = TTF_OpenFont("consola.ttf", 36);
+			if (DefaultFont == NULL) {
+				printf("TTF could not open font! SDL_ttf Error: %s\n", TTF_GetError());
+				success = false;
+			}
 		}
 	}
 
@@ -128,17 +134,22 @@ std::vector<GameObject*>* PuddleApp::getExtraGameObjects() {
 	return _gameWorld->getExtraGameObjects();
 }
 
-void PuddleApp::updateGame(Uint32 deltaT) {
+void PuddleApp::updateGame(Uint64 deltaT) {
 	_physicsSystem->update(deltaT);
-	_gameWorld->update();
+	_gameWorld->update(deltaT);
+	//_physicsSystem->checkCollisions(this);
 }
 
 void PuddleApp::renderGame() {
-	_renderer->renderGame(_gameObjectManager);
+	//_renderer->renderGame(_gameObjectManager);
 }
 
 PuddleRenderer* PuddleApp::getRenderer() {
 	return _renderer;
+}
+
+std::vector<GameObject*>* PuddleApp::getGameObjects() {
+	return _gameWorld->getGameObjects();
 }
 
 void PuddleApp::close() {

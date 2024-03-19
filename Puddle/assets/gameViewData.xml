@@ -8,25 +8,56 @@
 				<position><x>900</x><y>500</y></position>
 				<radius>1.0f</radius>
 			</oneBall>
-			<!-- <twoBall> -->
-				<!-- <resourceName>blackOutlineCircle.png</resourceName> -->
-				<!-- <position><x>100</x><y>800</y></position> -->
-				<!-- <radius>1.5f</radius> -->
-			<!-- </twoBall> -->
+			<twoBall>
+				<resourceName>blackOutlineCircle.png</resourceName>
+				<position><x>900</x><y>800</y></position>
+				<radius>1.0f</radius>
+			</twoBall>
+			<threeBall>
+				<resourceName>blackOutlineCircle.png</resourceName>
+				<position><x>1500</x><y>400</y></position>
+				<radius>1.0f</radius>
+			</threeBall>
+			<fourBall>
+				<resourceName>blackOutlineCircle.png</resourceName>
+				<position><x>300</x><y>950</y></position>
+				<radius>1.0f</radius>
+			</fourBall>
+			<fiveBall>
+				<resourceName>blackOutlineCircle.png</resourceName>
+				<position><x>1400</x><y>800</y></position>
+				<radius>1.0f</radius>
+			</fiveBall>
 		</PoolBalls>
 		<PoolWalls>
 			<poolWallOne>
 				<resourceName>blackOutlineRect.png</resourceName>
-				<position><x>60</x><y>1000</y></position>
+				<position><x>50</x><y>1000</y></position>
 				<width>1800</width>
 				<height>50</height>
+				<normal><x>0.0</x><y>-1.0</y></normal>
 			</poolWallOne>
-			<!-- <poolWallOne> -->
-				<!-- <resourceName>blackOutlineRect.png</resourceName> -->
-				<!-- <position><x>60</x><y>500</y></position> -->
-				<!-- <width>200</width> -->
-				<!-- <height>100</height> -->
-			<!-- </poolWallOne> -->
+			<poolWallTwo>
+				<resourceName>blackOutlineRect.png</resourceName>
+				<position><x>50</x><y>50</y></position>
+				<width>50</width>
+				<height>1800</height>
+				<normal><x>1.0</x><y>0.0</y></normal>
+			</poolWallTwo>
+			<poolWallThree>
+				<resourceName>blackOutlineRect.png</resourceName>
+				<position><x>50</x><y>50</y></position>
+				<width>1800</width>
+				<height>50</height>
+				<normal><x>0.0</x><y>1.0</y></normal>
+			</poolWallThree>
+			<poolWallFour>
+				<resourceName>blackOutlineRect.png</resourceName>
+				<position><x>1870</x><y>50</y></position>
+				<width>50</width>
+				<height>1800</height>
+				<normal><x>-1.0</x><y>0.0</y></normal>
+			</poolWallFour>
 		</PoolWalls>
 	</gameObjects>
 </DebugView>
