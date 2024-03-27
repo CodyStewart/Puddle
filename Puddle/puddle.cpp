@@ -152,6 +152,10 @@ std::vector<GameObject*>* PuddleApp::getGameObjects() {
 	return _gameWorld->getGameObjects();
 }
 
+GameObject* PuddleApp::getObject(uint32 id) {
+	return _gameWorld->getObject(id);
+}
+
 void PuddleApp::close() {
 	Mix_HaltMusic();
 

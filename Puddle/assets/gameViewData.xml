@@ -4,29 +4,34 @@
 	<gameObjects>
 		<PoolBalls>
 			<oneBall>
-				<resourceName>blackOutlineCircle.png</resourceName>
+				<resourceName>ball_1.png</resourceName>
 				<position><x>900</x><y>500</y></position>
 				<radius>1.0f</radius>
+				<elasticity>0.99f</elasticity>
 			</oneBall>
 			<twoBall>
-				<resourceName>blackOutlineCircle.png</resourceName>
+				<resourceName>ball_2.png</resourceName>
 				<position><x>900</x><y>800</y></position>
 				<radius>1.0f</radius>
+				<elasticity>0.99f</elasticity>
 			</twoBall>
 			<threeBall>
 				<resourceName>blackOutlineCircle.png</resourceName>
 				<position><x>1500</x><y>400</y></position>
 				<radius>1.0f</radius>
+				<elasticity>0.99f</elasticity>
 			</threeBall>
 			<fourBall>
 				<resourceName>blackOutlineCircle.png</resourceName>
 				<position><x>300</x><y>950</y></position>
 				<radius>1.0f</radius>
+				<elasticity>0.99f</elasticity>
 			</fourBall>
 			<fiveBall>
 				<resourceName>blackOutlineCircle.png</resourceName>
 				<position><x>1400</x><y>800</y></position>
 				<radius>1.0f</radius>
+				<elasticity>0.99f</elasticity>
 			</fiveBall>
 		</PoolBalls>
 		<PoolWalls>
@@ -36,6 +41,7 @@
 				<width>1800</width>
 				<height>50</height>
 				<normal><x>0.0</x><y>-1.0</y></normal>
+				<elasticity>0.8f</elasticity>
 			</poolWallOne>
 			<poolWallTwo>
 				<resourceName>blackOutlineRect.png</resourceName>
@@ -43,6 +49,7 @@
 				<width>50</width>
 				<height>1800</height>
 				<normal><x>1.0</x><y>0.0</y></normal>
+				<elasticity>0.8f</elasticity>
 			</poolWallTwo>
 			<poolWallThree>
 				<resourceName>blackOutlineRect.png</resourceName>
@@ -50,6 +57,7 @@
 				<width>1800</width>
 				<height>50</height>
 				<normal><x>0.0</x><y>1.0</y></normal>
+				<elasticity>0.8f</elasticity>
 			</poolWallThree>
 			<poolWallFour>
 				<resourceName>blackOutlineRect.png</resourceName>
@@ -57,6 +65,7 @@
 				<width>50</width>
 				<height>1800</height>
 				<normal><x>-1.0</x><y>0.0</y></normal>
+				<elasticity>0.8f</elasticity>
 			</poolWallFour>
 		</PoolWalls>
 	</gameObjects>

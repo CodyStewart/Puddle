@@ -1,4 +1,5 @@
 #pragma once
+#pragma warning (disable:4244)
 
 #include <vector>
 
@@ -37,7 +38,7 @@ struct PuddleApp {
 
 	PuddleRenderer* getRenderer();
 	std::vector<GameObject*>* getGameObjects();
-	GameObject* getObject(uint32 id) { return _gameWorld->getObject(id); }
+	GameObject* getObject(uint32 id);
 	//uint32 getThisFrametime() { return _physicsSystem->getThisFrametime(); }
 
 	void close();

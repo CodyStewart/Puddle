@@ -13,7 +13,7 @@ struct Game {
 	Game();
 	~Game();
 
-	void update(Uint32 deltaT);
+	void update(Uint64 deltaT);
 
 	bool generateView(ViewState viewState, ResourceManager* resManager, PuddleRenderer* renderer);
 

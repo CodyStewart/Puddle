@@ -21,6 +21,9 @@ TextTexture* frameTimeText = new TextTexture();
 
 EntityGenerator* entGen = new EntityGenerator();
 
+// DEBUG
+extern TextTexture* momentumText;
+
 int main(int argc, char* args[]) {
 	if (!app->init()) {
 		printf("Failed to initialize app!\n");
@@ -43,6 +46,8 @@ int main(int argc, char* args[]) {
 				else {
 					static Timer timeToStart = Timer();
 					timeToStart.start();
+					Timer timer = Timer();
+					timer.start();
 
 					/*if (Mix_PlayingMusic() == 0) {
 						Mix_PlayMusic(music, -1);
@@ -76,21 +81,32 @@ int main(int argc, char* args[]) {
 
 						deltaT = frameTimer.getTicks();
 						frameTimer.start();
+
 						std::stringstream fpsStr;
 						fpsStr.str("");
-						fpsStr << "deltaT: " << deltaT;
+						fpsStr << "deltaT: " << deltaT / 10000.0f;
 						frameTimeText->loadFromRenderedText(app->getRenderer()->getRenderer(), fpsStr.str().c_str(), DefaultFont, {0,0,0});
 
-						if (timeToStart.getTicks() / 10000 > 3000.0f) {
+						if (timeToStart.getTicks() / 10000 > 2000.0f) {
 							auto objects = app->getGameObjects();
-							objects->at(0)->AddImpulse(Vec2(2.0f, 14.0f));
+							objects->at(0)->AddLinearImpulse(Vec2(1.0f, 14.0f));
+							objects->at(0)->AddAngularImpulse(-2.0f);
 							timeToStart.stop();
 						}
+						
+						//if (timer.getTicks() / 10000 > 6000.0f) {
+						//	app->loadView(debugView);
+						//	timer.stop();
+						//	timer.start();
+						//	timeToStart.start();
+						//}
 
 						SDL_SetRenderDrawColor(app->getRenderer()->getRenderer(), 0xFF, 0xFF, 0xFF, 0xFF);
 						SDL_RenderClear(app->getRenderer()->getRenderer());
 						app->updateGame(deltaT);
 						frameTimeText->render(app->getRenderer()->getRenderer(), 0, 0);
+						momentumText->render(app->getRenderer()->getRenderer(), 1000, 0);
+
 						SDL_RenderPresent(app->getRenderer()->getRenderer());
 					}
 				}

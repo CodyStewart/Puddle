@@ -22,6 +22,7 @@ struct Texture
 
 	void render(SDL_Renderer* renderer, int x, int y, SDL_Rect* clip = NULL);
 	void renderScaled(SDL_Renderer* renderer, int x, int y, int width, int height, SDL_Rect* clip = NULL);
+	void renderScaledEx(SDL_Renderer* renderer, int x, int y, int width, int height, float rotation, SDL_Rect* clip = NULL);
 
 	void setTexture(SDL_Texture* texture);
 

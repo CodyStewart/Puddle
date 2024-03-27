@@ -73,6 +73,19 @@ void Texture::renderScaled(SDL_Renderer* renderer, int x, int y, int width, int 
 	}
 }
 
+void Texture::renderScaledEx(SDL_Renderer* renderer, int x, int y, int width, int height, float rotation, SDL_Rect* clip) {
+	if (_texture != NULL) {
+		SDL_Rect renderQuad = { x, y, width, height };
+
+		if (clip != NULL) {
+			renderQuad.w = clip->w;
+			renderQuad.h = clip->h;
+		}
+
+		SDL_RenderCopyEx(renderer, _texture, clip, &renderQuad, (double)rotation, NULL, SDL_FLIP_NONE);
+	}
+}
+
 void Texture::setTexture(SDL_Texture* texture) {
 	_texture = texture;
 }

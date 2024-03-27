@@ -1,11 +1,11 @@
 #include <stdio.h>
+#include <limits>
 
 #include <tinyxml2.h>
 
 #include "Views.h"
 #include "poolBall.h"
 #include "poolTable.h"
-
 
 void loadStartView(View* view, ResourceManager* resManager, PuddleRenderer* renderer) {
 	//Resource circleText("blackOutlineCircle.png");
@@ -62,15 +62,21 @@ void loadDebugView(View* view, ResourceManager* resManager, PuddleRenderer* rend
 		const char* radiusText = attribute->FirstChild()->Value();
 		radius = std::stof(radiusText);
 
+		// get the restitution
+		float restitution = 0.0f;
+		attribute = attribute->NextSibling();
+		const char* restitutionText = attribute->FirstChild()->Value();
+		restitution = std::stof(restitutionText);
+
 		// instantiate the object using the above data
 		ResHandleShrdPtr handle = resManager->getHandle(&objectResourceName);
 		if (handle.get()) {
 			Texture* texture = new Texture(renderer->getRenderer(), handle.get()->buffer(), handle.get()->size());
-			PoolBallPhysicsComponent* physicsComp = new PoolBallPhysicsComponent(position, radius);
+			PoolBallPhysicsComponent* physicsComp = new PoolBallPhysicsComponent(position, radius, restitution);
 			GameObject* poolBallObject = new GameObject(new PoolBallInputComponent(), physicsComp, new PoolBallGraphicsComponent(renderer, physicsComp, texture));
 			poolBallObject->setMovable(true);
 			poolBallObject->setShapeType(CIRCLE);
-			poolBallObject->setMass(1);
+			poolBallObject->setMass(1.0f);
 			view->addGameObject(poolBallObject);
 		}
 
@@ -118,13 +124,21 @@ void loadDebugView(View* view, ResourceManager* resManager, PuddleRenderer* rend
 		normal._x = xDir;
 		normal._y = yDir;
 
+		// get the restitution
+		float restitution = 0.0f;
+		attribute = attribute->NextSibling();
+		const char* restitutionText = attribute->FirstChild()->Value();
+		restitution = std::stof(restitutionText);
+
 		ResHandleShrdPtr handle = resManager->getHandle(&objectResourceName);
 		if (handle.get()) {
 			Texture* texture = new Texture(renderer->getRenderer(), handle.get()->buffer(), handle.get()->size());
-			PoolWallPhysicsComponent* physicsComp = new PoolWallPhysicsComponent(position, width, height, normal);
+			PoolWallPhysicsComponent* physicsComp = new PoolWallPhysicsComponent(position, width, height, normal, restitution);
 			GameObject* poolWallObject = new GameObject(new PoolWallInputComponent(), physicsComp, new PoolWallGraphicsComponent(renderer, physicsComp, texture));
 			poolWallObject->setMovable(false);
 			poolWallObject->setShapeType(RECT);
+			float max = FLT_MAX;
+			poolWallObject->setMass(max);
 			view->addGameObject(poolWallObject);
 		}
 

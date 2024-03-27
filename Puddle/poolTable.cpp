@@ -4,11 +4,12 @@ void PoolWallInputComponent::update() {
 
 }
 
-PoolWallPhysicsComponent::PoolWallPhysicsComponent(Point pos, int width, int height, Vec2 normal) {
-	_velocity = Vec2();
+PoolWallPhysicsComponent::PoolWallPhysicsComponent(Point pos, int width, int height, Vec2 normal, float restitution) {
+	_linearVelocity = Vec2();
 	_volume = Rect(pos, width, height);
 	_collisionVolume = Rect(pos, width, height);
 	_normal = normal;
+	_elasticity = restitution;
 }
 
 PoolWallPhysicsComponent::~PoolWallPhysicsComponent() {
@@ -28,16 +29,16 @@ void PoolWallPhysicsComponent::setPosition(Point pos) {
 	_collisionVolume._position = pos;
 }
 
-void PoolWallPhysicsComponent::resolveCollision(GameObject* objectCollided) {
+void PoolWallPhysicsComponent::resolveCollision(ContactInfo* cInfo) {
 	return; // PoolWalls don't need to react to collisions
 }
 
-void PoolWallPhysicsComponent::update(std::list<Vec2>* forcesList, std::list<Vec2>* impulsesList) {
-	//_volume._point.x += 1;
-	//Vec2 gravity = physicsSystem->calculateGravity();
-	//_velocity += gravity;
-	//checkCollisions(world);
-	//move(this);
+void PoolWallPhysicsComponent::update(std::list<Vec2>* forcesList, std::list<Vec2>* impulsesList, std::list<float>* angularImpulsesList) {
+	// walls do not move in this game, but we are still adding impulses in case of expansion
+	// for now, clear the lists
+	forcesList->clear();
+	impulsesList->clear();
+	angularImpulsesList->clear();
 }
 
 PoolWallGraphicsComponent::PoolWallGraphicsComponent(PuddleRenderer* renderer, PoolWallPhysicsComponent* physics, Texture* texture) {
