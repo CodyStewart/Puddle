@@ -5,21 +5,29 @@ Texture::Texture() {
 	_height = 0;
 }
 
+Texture::Texture(SDL_Texture* texture) {
+	if (texture != NULL) {
+		SDL_QueryTexture(texture, NULL, NULL, &_width, &_height);
+		_texture = texture;
+	}
+	else {
+		_width = 0;
+		_height = 0;
+		_texture = nullptr;
+	}
+}
+
 Texture::Texture(Texture* other) { // copy constructor
 	_texture = other->getTexture();
 	_width = other->getWidth();
 	_height = other->getHeight();
-
 }
 
 Texture::Texture(SDL_Renderer* renderer, char* buffer, uint32 size) {
 	_texture = nullptr;
 	SDL_RWops* ops = SDL_RWFromMem(buffer, size);
-	printf("%d", IMG_isPNG(ops));
-	printf("%s\n", SDL_GetError());
 	printf("%s\n", IMG_GetError());
 	_texture = IMG_LoadTexture_RW(renderer, ops, 0);
-	printf("%s\n", SDL_GetError());
 	printf("%s\n", IMG_GetError());
 
 	if (_texture != NULL) {

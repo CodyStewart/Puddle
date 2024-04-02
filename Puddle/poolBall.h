@@ -1,10 +1,33 @@
 #pragma once
+#include <SDL.h>
+#include <zlib.h>
+
+#define STB_IMAGE_IMPLEMENTATION
+#define STB_IMAGE_STATIC
+#include <stb_image.h>
 
 #include "gameLogic.h"
 #include "gameObjects.h"
 #include "puddleRenderer.h"
 
 struct PuddleRenderer;
+
+struct BallSampler {
+	SDL_Point _centerOfBall = { 0,0 };
+	float _radius = 0.0;
+	Vec2 _prevOrientation = Vec2();
+
+	char* _samples = nullptr;
+	int _width = 0;	// width of the image
+	int _height = 0;	// height of the image
+	int _size = 0;	// size of the image. This is width * height * (depth * 8)
+	int _depth = 0;	// depth of each pixel. Measured as number of 8-bit components (thus RBGA = 4)
+
+	bool withinSampler(int x, int y);
+	//bool withinOutsideSamplerRing(int x, int y);
+	//bool withinMiddleSamplerRing(int x, int y);
+	//bool withinInsideSamplerRing(int x, int y);
+};
 
 struct PoolBallInputComponent : InputComponent {
 	~PoolBallInputComponent() {};
@@ -54,7 +77,7 @@ private:
 
 struct PoolBallGraphicsComponent : GraphicsComponent {
 
-	PoolBallGraphicsComponent(PuddleRenderer* renderer, PoolBallPhysicsComponent* physics, Texture* texture);
+	PoolBallGraphicsComponent(PuddleRenderer* renderer, PoolBallPhysicsComponent* physics, ResHandleShrdPtr rawDataHandle);
 	~PoolBallGraphicsComponent();
 
 	virtual Texture* getTexture() { return _texture; }
@@ -64,4 +87,10 @@ private:
 	PuddleRenderer* _puddleRenderer;
 	PoolBallPhysicsComponent* _physics;
 	Texture* _texture;
+	Texture* _ring;
+	ResHandleShrdPtr _handle;
+	RawImageData _imgData;
+	BallSampler _sampler;
+
+	Texture* computeOrientedTexture();
 };

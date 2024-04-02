@@ -89,8 +89,8 @@ int main(int argc, char* args[]) {
 
 						if (timeToStart.getTicks() / 10000 > 2000.0f) {
 							auto objects = app->getGameObjects();
-							objects->at(0)->AddLinearImpulse(Vec2(1.0f, 14.0f));
-							objects->at(0)->AddAngularImpulse(-2.0f);
+							objects->at(0)->AddLinearImpulse(Vec2(1.0f, 8.0f));
+							//objects->at(0)->AddAngularImpulse(-8.0f);
 							timeToStart.stop();
 						}
 						

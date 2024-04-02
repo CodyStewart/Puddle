@@ -9,6 +9,7 @@
 #define UINTMAX UINT_MAX
 
 #define PI 3.14159f
+#define TAU (2*PI)
 #define GRAVITY 9.8f
 
 #if !defined(SAFE_DELETE)

@@ -39,7 +39,7 @@ ResHandleShrdPtr ResourceCache::getHandle(Resource* res) {
 	if (itemItr != resMap.end())
 		handle = itemItr->second;
 	else
-		std::cout << "Resource" << res->_name << "not found!\n";
+		std::cout << "Resource " << res->_name << " not found!\n";
 
 	return handle;
 }

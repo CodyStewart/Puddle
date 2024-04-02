@@ -30,9 +30,11 @@ Vec2 Vec2::getPerp() {
 }
 
 Vec2 Vec2::normalize() {
-	this->_x /= _length;
-	this->_y /= _length;
-	this->calculateMagnitude();
+	if (this->_length != 0.0f) {
+		this->_x /= _length;
+		this->_y /= _length;
+		this->calculateMagnitude();
+	}
 	return *this;
 }
 

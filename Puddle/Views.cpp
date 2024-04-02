@@ -35,8 +35,17 @@ void loadDebugView(View* view, ResourceManager* resManager, PuddleRenderer* rend
 
 	// load the PoolBalls
 	const tinyxml2::XMLElement* poolBallElement = gameObjectElement->FirstChildElement("PoolBalls");
-	const tinyxml2::XMLNode* poolBall = poolBallElement->FirstChild();
+ 	const tinyxml2::XMLNode* poolBall = poolBallElement->FirstChild();
 	for (int poolBallCount = 0; poolBallCount < poolBallElement->ChildElementCount(); poolBallCount++) {
+		// ignore any comment nodes
+		auto comment = dynamic_cast<const tinyxml2::XMLComment*>(poolBall);
+		while (comment)
+		{
+			// If it is, we ask the parent to delete this, but first move pointer to next member so we don't get lost in a NULL reference
+			poolBall = poolBall->NextSibling();
+			comment = dynamic_cast<const tinyxml2::XMLComment*>(poolBall);
+		}
+
 		// pull the data out of the xml file
 		
 		// get the resource file
@@ -71,9 +80,10 @@ void loadDebugView(View* view, ResourceManager* resManager, PuddleRenderer* rend
 		// instantiate the object using the above data
 		ResHandleShrdPtr handle = resManager->getHandle(&objectResourceName);
 		if (handle.get()) {
-			Texture* texture = new Texture(renderer->getRenderer(), handle.get()->buffer(), handle.get()->size());
+			//Texture* texture = new Texture(renderer->getRenderer(), handle.get()->buffer(), handle.get()->size());
 			PoolBallPhysicsComponent* physicsComp = new PoolBallPhysicsComponent(position, radius, restitution);
-			GameObject* poolBallObject = new GameObject(new PoolBallInputComponent(), physicsComp, new PoolBallGraphicsComponent(renderer, physicsComp, texture));
+			PoolBallGraphicsComponent* graphicsComp = new PoolBallGraphicsComponent(renderer, physicsComp, handle);
+			GameObject* poolBallObject = new GameObject(new PoolBallInputComponent(), physicsComp, graphicsComp);
 			poolBallObject->setMovable(true);
 			poolBallObject->setShapeType(CIRCLE);
 			poolBallObject->setMass(1.0f);

@@ -11,6 +11,7 @@
 struct Texture
 {
 	Texture();
+	Texture(SDL_Texture* texture);
 	Texture(Texture* other); // copy constructor
 	Texture(SDL_Renderer* renderer, char* buffer, uint32 size);
 

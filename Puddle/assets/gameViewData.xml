@@ -3,36 +3,36 @@
 	<backgroundTexture>example.png</backgroundTexture>
 	<gameObjects>
 		<PoolBalls>
-			<oneBall>
-				<resourceName>ball_1.png</resourceName>
-				<position><x>900</x><y>500</y></position>
-				<radius>1.0f</radius>
-				<elasticity>0.99f</elasticity>
-			</oneBall>
+			<!-- <oneball> -->
+				<!-- <resourcename>ball_2.png</resourcename> -->
+				<!-- <position><x>900</x><y>500</y></position> -->
+				<!-- <radius>1.0f</radius> -->
+				<!-- <elasticity>0.99f</elasticity> -->
+			<!-- </oneball> -->
 			<twoBall>
 				<resourceName>ball_2.png</resourceName>
 				<position><x>900</x><y>800</y></position>
 				<radius>1.0f</radius>
 				<elasticity>0.99f</elasticity>
 			</twoBall>
-			<threeBall>
-				<resourceName>blackOutlineCircle.png</resourceName>
-				<position><x>1500</x><y>400</y></position>
-				<radius>1.0f</radius>
-				<elasticity>0.99f</elasticity>
-			</threeBall>
-			<fourBall>
-				<resourceName>blackOutlineCircle.png</resourceName>
-				<position><x>300</x><y>950</y></position>
-				<radius>1.0f</radius>
-				<elasticity>0.99f</elasticity>
-			</fourBall>
-			<fiveBall>
-				<resourceName>blackOutlineCircle.png</resourceName>
-				<position><x>1400</x><y>800</y></position>
-				<radius>1.0f</radius>
-				<elasticity>0.99f</elasticity>
-			</fiveBall>
+			<!-- <threeBall> -->
+				<!-- <resourceName>ball_2_small.png</resourceName> -->
+				<!-- <position><x>1500</x><y>400</y></position> -->
+				<!-- <radius>1.0f</radius> -->
+				<!-- <elasticity>0.99f</elasticity> -->
+			<!-- </threeBall> -->
+			<!-- <fourBall> -->
+				<!-- <resourceName>blackOutlineCircle.png</resourceName> -->
+				<!-- <position><x>300</x><y>950</y></position> -->
+				<!-- <radius>1.0f</radius> -->
+				<!-- <elasticity>0.99f</elasticity> -->
+			<!-- </fourBall> -->
+			<!-- <fiveBall> -->
+				<!-- <resourceName>blackOutlineCircle.png</resourceName> -->
+				<!-- <position><x>1400</x><y>800</y></position> -->
+				<!-- <radius>1.0f</radius> -->
+				<!-- <elasticity>0.99f</elasticity> -->
+			<!-- </fiveBall> -->
 		</PoolBalls>
 		<PoolWalls>
 			<poolWallOne>

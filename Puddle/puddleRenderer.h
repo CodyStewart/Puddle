@@ -6,6 +6,15 @@
 
 #include "puddle.h"
 
+// raw data for an image
+struct RawImageData {
+	char* buffer = nullptr;	// pixel data buffer
+	int width = 0;	// width of the image
+	int height = 0;	// height of the image
+	int size = 0;	// size of the image. This is width * height * (depth * 8)
+	int depth = 0;	// depth of each pixel. Measured as number of 8-bit components (thus RBGA = 4)
+};
+
 struct PuddleRenderer {
 	PuddleRenderer();
 	
