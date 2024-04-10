@@ -21,8 +21,8 @@ void loadStartView(View* view, ResourceManager* resManager, PuddleRenderer* rend
 void loadDebugView(View* view, ResourceManager* resManager, PuddleRenderer* renderer) {
 	tinyxml2::XMLDocument doc;
 	doc.LoadFile("assets/gameViewData.xml");
-	doc.PrintError();
-	printf("%d", doc.ErrorID());
+	//doc.PrintError();
+	//printf("%d", doc.ErrorID());
 
 	// find the correct element
 	const tinyxml2::XMLElement* debugElement = doc.FirstChildElement("DebugView");
@@ -83,10 +83,16 @@ void loadDebugView(View* view, ResourceManager* resManager, PuddleRenderer* rend
 			//Texture* texture = new Texture(renderer->getRenderer(), handle.get()->buffer(), handle.get()->size());
 			PoolBallPhysicsComponent* physicsComp = new PoolBallPhysicsComponent(position, radius, restitution);
 			PoolBallGraphicsComponent* graphicsComp = new PoolBallGraphicsComponent(renderer, physicsComp, handle);
+			if (poolBallCount == 0)
+				graphicsComp->setKind(SOLID);
+			else
+				graphicsComp->setKind(STRIPED);
+			physicsComp->setGraphics(graphicsComp);
 			GameObject* poolBallObject = new GameObject(new PoolBallInputComponent(), physicsComp, graphicsComp);
 			poolBallObject->setMovable(true);
 			poolBallObject->setShapeType(CIRCLE);
 			poolBallObject->setMass(1.0f);
+
 			view->addGameObject(poolBallObject);
 		}
 
@@ -233,9 +239,9 @@ void View::addGameObject(GameObject* obj) {
 	_gameObjects.push_back(obj);
 }
 
-void View::update() {
+void View::update(float deltaT) {
 	for (auto object : _gameObjects) {
-		object->update();
+		object->update(deltaT);
 	}
 }
 

@@ -134,7 +134,7 @@ std::vector<GameObject*>* PuddleApp::getExtraGameObjects() {
 	return _gameWorld->getExtraGameObjects();
 }
 
-void PuddleApp::updateGame(Uint64 deltaT) {
+void PuddleApp::updateGame(float deltaT) {
 	_physicsSystem->update(deltaT);
 	_gameWorld->update(deltaT);
 	//_physicsSystem->checkCollisions(this);

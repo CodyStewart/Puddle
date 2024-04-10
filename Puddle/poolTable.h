@@ -50,7 +50,7 @@ struct PoolWallGraphicsComponent : GraphicsComponent {
 	~PoolWallGraphicsComponent();
 
 	virtual Texture* getTexture() { return _texture; }
-	virtual void update();
+	virtual void update(float leftoverTime);
 
 private:
 	PuddleRenderer* _puddleRenderer;

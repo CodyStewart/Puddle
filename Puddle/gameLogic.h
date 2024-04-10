@@ -33,6 +33,8 @@ struct Point {
 	Vec2 toVec();
 
 	Point* operator=(Point rhs) { x = rhs.x; y = rhs.y; return this; }
+	Point operator+(Point rhs) { return Point(x + rhs.x, y + rhs.y); }
+	Point operator*(float rhs) { return Point(x * rhs, y * rhs); }
 	Point* operator+=(Point rhs) { x += rhs.x; y += rhs.y; return this; }
 	Point* operator-=(Point rhs) { x -= rhs.x; y -= rhs.y; return this; }
 };
@@ -53,6 +55,7 @@ struct Vec2 {
 	
 	void calculateMagnitude() { _length = sqrt(_x * _x + _y * _y); }
 	Vec2 normalize();
+	Vec2 clamp(float length);	// clamp a vector to a given length with the same direction
 
 	Vec2& operator=(const Vec2& rhs);
 	//Vec2& operator=(Vec2* rhs);
@@ -396,7 +399,7 @@ struct InputComponent {
 struct GraphicsComponent {
 	~GraphicsComponent() {};
 	virtual Texture* getTexture() = 0;
-	virtual void update() = 0;
+	virtual void update(float leftoverTime) = 0;
 };
 
 struct PhysicsComponent {

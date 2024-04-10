@@ -57,9 +57,10 @@ int main(int argc, char* args[]) {
 
 					bool runGame = true;
 
-					Uint64 deltaT = 0;
 					Timer frameTimer = Timer();
 					frameTimer.start();
+					float lag = 0.0f;
+					float deltaT = frameTimer.getTicks();
 
 					while (runGame) {
 						while (SDL_PollEvent(&e) != 0) {
@@ -79,18 +80,19 @@ int main(int argc, char* args[]) {
 							}
 						}
 
+						lag += frameTimer.getTicks();
 						deltaT = frameTimer.getTicks();
 						frameTimer.start();
 
 						std::stringstream fpsStr;
 						fpsStr.str("");
-						fpsStr << "deltaT: " << deltaT / 10000.0f;
+						fpsStr << "deltaT: " << deltaT;
 						frameTimeText->loadFromRenderedText(app->getRenderer()->getRenderer(), fpsStr.str().c_str(), DefaultFont, {0,0,0});
 
-						if (timeToStart.getTicks() / 10000 > 2000.0f) {
+						if (timeToStart.getTicks() > 2000.0f) {
 							auto objects = app->getGameObjects();
-							objects->at(0)->AddLinearImpulse(Vec2(1.0f, 8.0f));
-							//objects->at(0)->AddAngularImpulse(-8.0f);
+							objects->at(0)->AddLinearImpulse(Vec2(-14.0f, 2.0f));
+							//objects->at(1)->AddAngularImpulse(10.0f);
 							timeToStart.stop();
 						}
 						
@@ -103,7 +105,14 @@ int main(int argc, char* args[]) {
 
 						SDL_SetRenderDrawColor(app->getRenderer()->getRenderer(), 0xFF, 0xFF, 0xFF, 0xFF);
 						SDL_RenderClear(app->getRenderer()->getRenderer());
-						app->updateGame(deltaT);
+						while (lag >= MS_PER_UPDATE) {
+							SDL_SetRenderDrawColor(app->getRenderer()->getRenderer(), 0xFF, 0xFF, 0xFF, 0xFF);
+							SDL_RenderClear(app->getRenderer()->getRenderer());
+
+							app->updateGame(MS_PER_UPDATE);
+							lag -= MS_PER_UPDATE;
+						}
+						app->setLeftoverTime(lag);
 						frameTimeText->render(app->getRenderer()->getRenderer(), 0, 0);
 						momentumText->render(app->getRenderer()->getRenderer(), 1000, 0);
 

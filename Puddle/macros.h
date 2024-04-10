@@ -12,6 +12,8 @@
 #define TAU (2*PI)
 #define GRAVITY 9.8f
 
+#define MS_PER_UPDATE 4.0f
+
 #if !defined(SAFE_DELETE)
 #define SAFE_DELETE(x) if(x) delete x; x=NULL;
 #endif

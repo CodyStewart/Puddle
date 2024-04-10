@@ -38,6 +38,13 @@ Vec2 Vec2::normalize() {
 	return *this;
 }
 
+Vec2 Vec2::clamp(float length) {
+	float theta = acosf(_x / _length);
+	float newX = length * cosf(theta);
+	float newY = length * sinf(theta);
+	return Vec2(newX, newY);
+}
+
 Vec2& Vec2::operator=(const Vec2& rhs) {
 	_x = rhs._x;
 	_y = rhs._y;
@@ -114,13 +121,13 @@ inline float& Vec2::operator[](const int idx) {
 
 Vec3::Vec3() : _x(0), _y(0), _z(0) {}
 
-inline Vec3::Vec3(float value) : _x(value), _y(value), _z(value) {}
+Vec3::Vec3(float value) : _x(value), _y(value), _z(value) {}
 
-inline Vec3::Vec3(const Vec3& rhs) : _x(rhs._x), _y(rhs._y), _z(rhs._z) {}
+Vec3::Vec3(const Vec3& rhs) : _x(rhs._x), _y(rhs._y), _z(rhs._z) {}
 
-inline Vec3::Vec3(float X, float Y, float Z) : _x(X), _y(Y), _z(Z) {}
+Vec3::Vec3(float X, float Y, float Z) : _x(X), _y(Y), _z(Z) {}
 
-inline Vec3::Vec3(const float* xyz) : _x(xyz[0]), _y(xyz[1]), _z(xyz[2]) {}
+Vec3::Vec3(const float* xyz) : _x(xyz[0]), _y(xyz[1]), _z(xyz[2]) {}
 
 Vec3& Vec3::operator=(const Vec3& rhs) {
 	_x = rhs._x;

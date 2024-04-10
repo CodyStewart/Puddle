@@ -55,10 +55,10 @@ GameObject* Game::getObject(uint32 id) {
 	return this->_world->getGameObject(id);
 }
 
-void Game::update(Uint64 deltaT) {
-	_world->update();
+void Game::update(float deltaT) {
+	_world->update(deltaT);
 
 	for (auto object : _extraGameObjects) {
-		object->update();
+		object->update(deltaT);
 	}
 }

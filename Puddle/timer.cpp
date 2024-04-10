@@ -41,7 +41,7 @@ void Timer::unpause() {
 	}
 }
 
-Uint64 Timer::getTicks() {
+float Timer::getTicks() {
 	Uint64 time = 0;
 
 	if (started) {
@@ -53,7 +53,7 @@ Uint64 Timer::getTicks() {
 		}
 	}
 
-	return time;
+	return time / 10000.0f;
 }
 
 bool Timer::isStarted() { return started; }

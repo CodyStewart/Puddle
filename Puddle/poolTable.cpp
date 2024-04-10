@@ -54,7 +54,7 @@ PoolWallGraphicsComponent::~PoolWallGraphicsComponent() {
 	}
 }
 
-void PoolWallGraphicsComponent::update() {
+void PoolWallGraphicsComponent::update(float leftoverTime) {
 	_texture->renderScaled(_puddleRenderer->getRenderer(), _physics->_volume._position.x, _physics->_volume._position.y, _physics->_volume._w, _physics->_volume._h);
 	SDL_RenderDrawLine(_puddleRenderer->getRenderer(), _physics->_volume._position.x, 0, _physics->_volume._position.x, 1050);
 	SDL_RenderDrawLine(_puddleRenderer->getRenderer(), 0, _physics->_volume._position.y, 1900, _physics->_volume._position.y);

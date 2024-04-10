@@ -11,7 +11,7 @@ PhysicsSystem::PhysicsSystem() {
 	timeSinceLastFrame = 0;
 }
 
-void PhysicsSystem::update(Uint64 deltaT) {		// deltaT is stored as 1
+void PhysicsSystem::update(float deltaT) {
 	timeSinceLastFrame = deltaT;
 }
 

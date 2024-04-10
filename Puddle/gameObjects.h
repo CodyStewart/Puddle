@@ -23,10 +23,10 @@ struct GameObject {
 	GameObject(PhysicsComponent* physics, GraphicsComponent* graphics) : _input(nullptr), _physics(physics), _graphics(graphics) { _entity = entGen->generatateNewEntity(); _physics->setID(_entity._id);  forcesList.clear(); impulsesList.clear(); angularImpulsesList.clear(); }
 	GameObject(InputComponent* input, PhysicsComponent* physics, GraphicsComponent* graphics) : _input(input), _physics(physics), _graphics(graphics) { _entity = entGen->generatateNewEntity(); _physics->setID(_entity._id); forcesList.clear(); impulsesList.clear(); angularImpulsesList.clear(); }
 
-	void update() {
+	void update(float deltaT) {
 		_input->update();
 		_physics->update(&forcesList, &impulsesList, &angularImpulsesList);
-		_graphics->update();
+		_graphics->update(deltaT);
 	}
 
 	//void notifyCollision(GameObject* objectCollided) { _physics->resolveCollision( objectCollided ); }

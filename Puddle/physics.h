@@ -13,16 +13,16 @@ enum COLLISION_TYPE {
 struct PhysicsSystem {
 	PhysicsSystem();
 
-	void update(Uint64 deltaT);
+	void update(float deltaT);
 
 	Vec2 calculateGravity();
 	void checkCollisions(PuddleApp* app);
 	bool checkCollisionWithObject(GameObject* object, ContactInfo* cInfo);
 
-	uint64 getThisFrametime() { return timeSinceLastFrame; }
+	float getThisFrametime() { return timeSinceLastFrame; }
 
 private:
-	uint64 timeSinceLastFrame;
+	float timeSinceLastFrame;
 
 	bool haveCollided(GameObject* first, GameObject* second, ContactInfo* info);
 	bool checkCollision(COLLISION_TYPE colType, GameObject* firstObjectToCheck, GameObject* secondObjectToCheck, ContactInfo* info);

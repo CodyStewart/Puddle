@@ -10,7 +10,7 @@ struct Timer {
 	void pause();
 	void unpause();
 
-	Uint64 getTicks();
+	float getTicks();
 
 	bool isStarted();
 	bool isPaused();

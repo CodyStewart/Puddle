@@ -21,12 +21,15 @@ struct PuddleRenderer {
 	bool init(SDL_Window* window);
 	void destroy();
 
+	void setLeftoverTime(float leftoverTime);
 	//void renderGame(GameObjectManager* GOManager);
 
 	SDL_Renderer* getRenderer();
+	float getLeftoverTime() { return _leftoverTime; }
 
 private:
 	SDL_Renderer* _renderer;
+	float _leftoverTime = 0.0f;
 	
 	//void renderGameEntities(GameObjectManager* GOManager);
 };

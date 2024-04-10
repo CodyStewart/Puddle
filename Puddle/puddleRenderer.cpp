@@ -30,6 +30,10 @@ void PuddleRenderer::destroy() {
 	_renderer = nullptr;
 }
 
+void PuddleRenderer::setLeftoverTime(float leftoverTime) { 
+	_leftoverTime = leftoverTime; 
+}
+
 //void PuddleRenderer::renderGameEntities(GameObjectManager* GOManager) {
 //	/*for (std::vector<GameObject>::iterator itr = objectsToRender->begin(); itr != objectsToRender->end(); itr++) {
 //		itr->render(this->getRenderer());

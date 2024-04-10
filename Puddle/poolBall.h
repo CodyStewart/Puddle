@@ -12,8 +12,14 @@
 
 struct PuddleRenderer;
 
+enum BallKind {
+	DEFAULT = 0,
+	SOLID,
+	STRIPED
+};
+
 struct BallSampler {
-	SDL_Point _centerOfBall = { 0,0 };
+	Point _centerOfBall = { 0,0 };
 	float _radius = 0.0;
 	Vec2 _prevOrientation = Vec2();
 
@@ -40,6 +46,7 @@ struct PoolBallPhysicsComponent : PhysicsComponent {
 	PoolBallPhysicsComponent(Point pos, float radius, float restitution);
 	~PoolBallPhysicsComponent();
 
+	void setGraphics(PoolBallGraphicsComponent* graphics);
 	void setID(uint32 id) { _id = id; }
 	void setPosition(Point pos);
 	void setOrientation(Vec3 orient);
@@ -56,14 +63,18 @@ struct PoolBallPhysicsComponent : PhysicsComponent {
 	ColliderData getData() { ColliderData data; data.radius = _collisionVolume._radius; return data; }
 	Point getPosition() { return _volume._position; }
 	float getElasticity() { return _elasticity; }
+	uint64 getThisFrameTime();
 
 private:
 	uint32 _id;
+
+	PoolBallGraphicsComponent* _graphics;
 
 	Vec2 _linearVelocity;
 	float _angularVelocity;
 	float _elasticity;
 	Vec3 _orientation;
+	Vec3 _orientationRectCoords;
 
 	Circle _volume;
 	Circle _collisionVolume;
@@ -72,16 +83,23 @@ private:
 	ShapeType shapeType = CIRCLE;
 	bool isMovable = true;
 
+	bool _hadImpulse = false;
+
 	void move(double frametime);
 };
 
 struct PoolBallGraphicsComponent : GraphicsComponent {
+	friend struct PoolBallPhysicsComponent;
 
 	PoolBallGraphicsComponent(PuddleRenderer* renderer, PoolBallPhysicsComponent* physics, ResHandleShrdPtr rawDataHandle);
 	~PoolBallGraphicsComponent();
 
 	virtual Texture* getTexture() { return _texture; }
-	virtual void update();
+	virtual void update(float leftoverTime);
+
+	void setKind(enum BallKind kind) { _kind = kind; }
+
+	BallSampler* getSampler() { return &_sampler; }
 
 private:
 	PuddleRenderer* _puddleRenderer;
@@ -91,6 +109,12 @@ private:
 	ResHandleShrdPtr _handle;
 	RawImageData _imgData;
 	BallSampler _sampler;
+	float distanceAccumulator = 0.0f;
+	float _angleToIntegrate = 0.0f;
+	float _percentAlongLine = 0.0f;
+
+	enum BallKind _kind;
 
 	Texture* computeOrientedTexture();
+	float timeElapsed = 0.0f;
 };

@@ -33,8 +33,10 @@ struct PuddleApp {
 
 	void addExtraGameObject(GameObject* obj);
 
-	void updateGame(Uint64 deltaT);
+	void updateGame(float deltaT);
 	void renderGame();
+
+	void setLeftoverTime(float leftover) { _renderer->setLeftoverTime(leftover); }
 
 	PuddleRenderer* getRenderer();
 	std::vector<GameObject*>* getGameObjects();

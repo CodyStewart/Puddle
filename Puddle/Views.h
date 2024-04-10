@@ -18,7 +18,7 @@ struct View {
 
 	void addGameObject(GameObject* obj);
 
-	void update();
+	void update(float deltaT);
 
 	std::vector<GameObject*>* getGameObjects();
 	GameObject* getGameObject(uint32 id);
